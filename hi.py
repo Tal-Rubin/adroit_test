@@ -1,7 +1,7 @@
 import numpy as np
 import xraylib as xrl
 
-num_bins = 30
+num_bins = 60
 min_E = 0
 max_E = 600
 
@@ -14,5 +14,5 @@ bin_sigma_tot = np.zeros(num_bins)
 
 for i in range(num_bins):
 	bin_sigma_tot[i] = xrl.CS_Total(92,bin_E[i])
-
+print(bin_E)
 print(bin_sigma_tot)
