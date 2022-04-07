@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import xraylib as xrl
 
 num_bins = 60
@@ -10,9 +11,12 @@ max_E = 600
 bin_lims = np.linspace(min_E, max_E ,num_bins +1) #kev
 bin_E = (bin_lims[1:]+bin_lims[:-1]) * 0.5
 
-bin_sigma_tot = np.zeros(num_bins)
 
-for i in range(num_bins):
-	bin_sigma_tot[i] = xrl.CS_Total(92,bin_E[i])
-print(bin_E)
-print(bin_sigma_tot)
+def get_sigma_tot(element, bin_lims, order):
+    bin_sigma_tot = np.zeros(num_bins)
+    for i in range(num_bins):
+    	bin_sigma_tot[i] = xrl.CS_Total(element,0.5*(bin_lims[i]+bin_lims[i+1]))
+    return bin_sigma_tot
+
+bin_sigma_tot = get_sigma_tot(92, bin_lims, 1)
+plt.plot(bin_E,bin_sigma_tot)
